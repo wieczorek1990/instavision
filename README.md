@@ -21,8 +21,8 @@ Backend port is 8000. Frontend port is 80.
 ```bash
 # backend
 pip3 install -r requirements.txt &&\
- python manage.py migrate &&\
- python manage.py runserver 8000
+ python3 manage.py migrate &&\
+ python3 manage.py runserver 8000
 # frontend
 cd dist/ && sudo python3 -m http.server 80
 # open http://localhost
