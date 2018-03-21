@@ -6,13 +6,16 @@ from google.cloud.vision import types
 from rest_framework import views
 from rest_framework import response
 from rest_framework import status
+from rest_framework import generics
+from rest_framework import mixins
 
 from api import models
 from api import forms
+from api import serializers
 from django import http
 
 
-class ImageUpload(views.APIView):
+class ImageUploadView(views.APIView):
     @staticmethod
     def grab_faces(image_obj):
         client = vision.ImageAnnotatorClient()
@@ -38,3 +41,18 @@ class ImageUpload(views.APIView):
             return http.HttpResponse('Upload successful.')
         else:
             return response.Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ImageListView(generics.ListAPIView):
+    queryset = models.Image.objects.all()
+    serializer_class = serializers.ImageSerializer
+
+
+class ImageDestroyView(generics.DestroyAPIView):
+    queryset = models.Image.objects.all()
+    serializer_class = serializers.ImageSerializer
+
+
+class ImageDetailView(generics.RetrieveAPIView):
+    queryset = models.Image.objects.all()
+    serializer_class = serializers.ImageSerializer
