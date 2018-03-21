@@ -1,10 +1,10 @@
 function makeList(data) {
     var out = '';
     for (var i = 0; i < data.length; i++) {
-        out += '<div>';
-        out += '<img src="' + data[0].image + '" style="max-width: 200px;">'
+        out += '<div style="margin: 20px">';
+        out += '<img src="' + data[i].image + '" style="max-width: 200px;">'
         var id = data[i]['id'];
-        out += '<button class="btn btn-primary" onclick="location.href=\'http://localhost/detail.html?id=' + id + '\';">DETAIL</button>';
+        out += '<button class="btn btn-primary" onclick="location.href=\'http://localhost/detail.html?id=' + id + '\';" style="margin: 10px;">DETAIL</button>';
         out += '<button data-id="' + id + '" class="destroy btn btn-danger">DESTROY</button>';
         out += '</div>'
     }

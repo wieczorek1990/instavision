@@ -38,7 +38,7 @@ class ImageUploadView(views.APIView):
         if form.is_valid():
             image = models.Image.objects.create(image=form.cleaned_data['image'])
             cls.grab_faces(image)
-            return http.HttpResponse('Upload successful.')
+            return http.HttpResponseRedirect('http://localhost/')
         else:
             return response.Response(status=status.HTTP_400_BAD_REQUEST)
 
