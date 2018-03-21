@@ -2,6 +2,7 @@ import io
 import json
 
 from django import http
+from django.db import transaction
 from google.cloud import vision
 from google.cloud.vision import types
 from rest_framework import generics
@@ -35,10 +36,11 @@ class ImageUploadView(views.APIView):
     def post(cls, request):
         form = forms.ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            image = models.Image.objects.create(
-                image=form.cleaned_data['image'])
-            cls.grab_faces(image)
-            return http.HttpResponseRedirect('http://localhost/')
+            with transaction.atomic():
+                image = models.Image.objects.create(
+                    image=form.cleaned_data['image'])
+                cls.grab_faces(image)
+                return http.HttpResponseRedirect('http://localhost/')
         else:
             return response.Response(status=status.HTTP_400_BAD_REQUEST)
 
