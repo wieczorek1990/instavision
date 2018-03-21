@@ -48,11 +48,6 @@ class ImageListView(generics.ListAPIView):
     serializer_class = serializers.ImageSerializer
 
 
-class ImageDestroyView(generics.DestroyAPIView):
-    queryset = models.Image.objects.all()
-    serializer_class = serializers.ImageSerializer
-
-
-class ImageDetailView(generics.RetrieveAPIView):
+class ImageDestroyRetrieveView(generics.DestroyAPIView, generics.RetrieveAPIView):
     queryset = models.Image.objects.all()
     serializer_class = serializers.ImageSerializer

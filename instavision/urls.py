@@ -22,6 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload/', views.ImageUploadView.as_view()),
     path('images/', views.ImageListView.as_view()),
-    path('image/<int:pk>/', views.ImageDestroyView.as_view()),
-    path('image/<int:pk>/', views.ImageDetailView.as_view()),
+    path('image/<int:pk>/', views.ImageDestroyRetrieveView.as_view()),
 ]
