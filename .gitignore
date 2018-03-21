@@ -1,6 +1,7 @@
-/.idea/
 *.jpg
 *.png
 *.sqlite3
-/venv/
 __pycache__
+/.idea/
+/venv/
+/instavision.json
