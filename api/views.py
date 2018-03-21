@@ -1,18 +1,17 @@
 import io
 import json
 
+from django import http
 from google.cloud import vision
 from google.cloud.vision import types
-from rest_framework import views
+from rest_framework import generics
 from rest_framework import response
 from rest_framework import status
-from rest_framework import generics
-from rest_framework import mixins
+from rest_framework import views
 
 from api import models
 from api import forms
 from api import serializers
-from django import http
 
 
 class ImageUploadView(views.APIView):
@@ -36,7 +35,8 @@ class ImageUploadView(views.APIView):
     def post(cls, request):
         form = forms.ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            image = models.Image.objects.create(image=form.cleaned_data['image'])
+            image = models.Image.objects.create(
+                image=form.cleaned_data['image'])
             cls.grab_faces(image)
             return http.HttpResponseRedirect('http://localhost/')
         else:
@@ -48,6 +48,7 @@ class ImageListView(generics.ListAPIView):
     serializer_class = serializers.ImageSerializer
 
 
-class ImageDestroyRetrieveView(generics.DestroyAPIView, generics.RetrieveAPIView):
+class ImageDestroyRetrieveView(generics.DestroyAPIView,
+                               generics.RetrieveAPIView):
     queryset = models.Image.objects.all()
     serializer_class = serializers.ImageSerializer
