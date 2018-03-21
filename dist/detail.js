@@ -8,9 +8,15 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function makeDetail(data) {
+    return '<img src="' + data.image + '" style="max-width: 400px;">'
+}
+
 $(function() {
-    var pk = getParameterByName('pk')
-    $.get("http://localhost:8000/image/" + pk + '/', function(data) {
-        console.log(data);
+    $detailContainer = $('#detail-container');
+    var id = getParameterByName('id');
+    $.get("http://localhost:8000/image/" + id + '/', function(data) {
+        var html = makeDetail(data);
+        $detailContainer.html(html);
     });
 });

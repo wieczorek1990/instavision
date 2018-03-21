@@ -127,5 +127,9 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True
 
 
+MEDIA_URL = '/images/'
+MEDIA_ROOT = BASE_DIR
+
+
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(
     BASE_DIR, 'instavision.json')

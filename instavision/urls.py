@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.conf.urls.static import static
+from django.conf import settings
 from api import views
 
 urlpatterns = [
@@ -23,4 +24,4 @@ urlpatterns = [
     path('upload/', views.ImageUploadView.as_view()),
     path('images/', views.ImageListView.as_view()),
     path('image/<int:pk>/', views.ImageDestroyRetrieveView.as_view()),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
